@@ -13,16 +13,16 @@ export class YoutubeTab extends Component {
         return <div key={this.props.index} className="ytswap__tab">
                 <span className="ytswap__title">{youtubeTab.title}</span><br/>
                 <div className="ytswap__actions">
-                    <img src={previousButtonUrl} className="ytswap__svg" title="Vidéo précédente" onClick={(e) => {
+                    <img src={previousButtonUrl} className="ytswap__svg" title="Vidéo précédente" alt="Vidéo précédente" onClick={(e) => {
                         this.previous(e, youtubeTab.id)
                     }}/>
-                    <img src={youtubeTab.audible === true ? pauseButtonUrl : playButtonUrl} className="ytswap__svg" title={youtubeTab.audible === true ? 'Pause' : 'Play'} onClick={(e) => {
+                    <img src={youtubeTab.audible === true ? pauseButtonUrl : playButtonUrl} className="ytswap__svg" title={youtubeTab.audible === true ? 'Pause' : 'Play'} alt={youtubeTab.audible === true ? 'Pause' : 'Play'} onClick={(e) => {
                         this.play(e, youtubeTab.id)
                     }}/>
-                    <img src={focusButtonUrl} className="ytswap__svg" title="Focus" onClick={(e) => {
+                    <img src={focusButtonUrl} className="ytswap__svg" title="Focus" alt="Focus" onClick={(e) => {
                         this.focus(e, youtubeTab.id)
                     }}/>
-                    <img src={nextButtonUrl} className="ytswap__svg" title="Vidéo suivante" onClick={(e) => {
+                    <img src={nextButtonUrl} className="ytswap__svg" title="Vidéo suivante" alt="Vidéo suivante" onClick={(e) => {
                         this.next(e, youtubeTab.id)
                     }}/>
                 </div>

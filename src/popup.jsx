@@ -16,7 +16,7 @@ export class Popup extends Component {
             <div id="ytswap__root_main">
                 <h1>Youtube Swap</h1>
 
-                <img src={closeButtonUrl} className="ytswap__svg_close_cross" title="Fermer" onClick={(e) => {
+                <img src={closeButtonUrl} className="ytswap__svg_close_cross" title="Fermer" alt="Fermer" onClick={(e) => {
                     e.preventDefault();
 
                     this.closePopup();
@@ -41,6 +41,8 @@ export class Popup extends Component {
     }
 
     componentDidUpdate() {
+        console.log(this.getCookie('ytswap_popup_closed'));
+
         if (this.getCookie('ytswap_popup_closed') === 'true') {
             let ytswapRootElement =  document.querySelector('#ytswap__root');
             let ytswapPopupOpenButton = document.querySelector('#ytswap__popup_open_button');
