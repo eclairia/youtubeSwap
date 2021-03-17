@@ -1,0 +1,132 @@
+#ytswap__root {
+    position: fixed !important;
+    top: 10% !important;
+    right: 0 !important;
+
+    width: 450px !important;
+
+    background-color: red !important;
+
+    z-index: 100000 !important;
+}
+
+#ytswap__root_main {
+    position: relative !important;
+
+    max-height: 250px;
+
+    overflow-y: scroll !important;
+}
+
+#ytswap__root_main h1 {
+    font-size: 1.6em;
+    font-weight: bold;
+
+    text-align: center;
+    text-decoration: underline;
+
+    color: #000;
+}
+
+.ytswap__svg_close_cross {
+    position: absolute !important;
+    top: 2px !important;
+    right: 5px !important;
+
+    width: 25px !important;
+    height: 25px !important;
+
+    cursor: pointer !important;
+}
+
+.ytswap__tab {
+    margin: 10px 0 10px 10px !important;
+
+    border-bottom: 1px solid black;
+}
+
+.ytswap__title {
+    display: block;
+
+    font-size: 14px !important;
+    font-weight: bold !important;
+
+    width: 90% !important;
+
+    color: #fff !important;
+}
+
+.ytswap__actions {
+    width: 60% !important;
+
+    margin-top: -5px !important;
+}
+
+.ytswap__svg {
+    width: 40px !important;
+    height: 30px !important;
+
+    cursor: pointer !important;
+}
+
+.ytswap__tab img {
+    padding-left: 15px !important;
+}
+
+.ytswap__popup_open_button {
+    position: absolute !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: -15px !important;
+
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    width: 30px !important;
+    height: 30px !important;
+
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+
+    cursor: pointer !important;
+
+    border-radius: 50% !important;
+
+    background-color: #000 !important;
+    color: #fff !important;
+
+    opacity: 0;
+}
+
+.ytswap__root_close_cookie {
+    transform: translate(98%);
+}
+
+.ytswap__root_open_animation {
+    animation: openPopup 2s forwards !important;
+}
+
+.ytswap__root_close_animation {
+    animation: closePopup 2s forwards !important;
+}
+
+@keyframes openPopup {
+    0% {
+        transform: translate(98%);
+    }
+
+    100% {
+        transform: translate(0%);
+    }
+}
+
+@keyframes closePopup {
+    0% {
+        transform: translate(0);
+    }
+
+    100% {
+        transform: translate(98%);
+    }
+}

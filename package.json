@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "esbuild": "^0.9.1",
+    "preact": "^10.5.12"
+  },
+  "scripts": {
+    "build": "esbuild src/main.jsx --bundle --jsx-factory=h --jsx-fragment=preact.Fragment --loader:.png=dataurl --outfile=dist/main.js"
+  }
+}

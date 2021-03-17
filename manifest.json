@@ -1,0 +1,35 @@
+{
+  "name": "Extension YouTube",
+  "description": "Extension YouTube",
+  "manifest_version": 2,
+  "version": "0.1",
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "tabCapture"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "dist/main.js"
+      ],
+      "css": [
+        "dist/main.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "src/img/*.svg"
+  ]
+}
