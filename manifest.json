@@ -15,10 +15,10 @@
         "https://*/*"
       ],
       "js": [
-        "dist/main.js"
+        "dist/ytswap.js"
       ],
       "css": [
-        "dist/main.css"
+        "dist/ytswap.css"
       ],
       "run_at": "document_end"
     }

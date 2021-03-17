@@ -19,11 +19,11 @@
 }
 
 #ytswap__root_main h1 {
-    font-size: 1.6em;
-    font-weight: bold;
+    font-size: 24px !important;
+    font-weight: bold !important;
 
-    text-align: center;
-    text-decoration: underline;
+    text-align: center !important;
+    text-decoration: underline !important;
 
     color: #000;
 }
@@ -70,6 +70,8 @@
 }
 
 .ytswap__tab img {
+    display: inline-block !important;
+
     padding-left: 15px !important;
 }
 
