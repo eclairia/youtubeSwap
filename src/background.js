@@ -24,7 +24,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 
     if (request.type === 'play') {
-        chrome.tabs.executeScript(tabId, {file: 'src/injectedScripts/play.js'});
+        chrome.tabs.executeScript(tabId, {file: 'src/injectedScripts/play.js', runAt: 'document_end'});
     }
 
     if (request.type === 'focus') {

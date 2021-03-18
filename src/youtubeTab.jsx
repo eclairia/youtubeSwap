@@ -16,7 +16,7 @@ export class YoutubeTab extends Component {
                     <img src={previousButtonUrl} className="ytswap__svg" title="Vidéo précédente" alt="Vidéo précédente" onClick={(e) => {
                         this.previous(e, youtubeTab.id)
                     }}/>
-                    <img src={youtubeTab.audible === true ? pauseButtonUrl : playButtonUrl} className="ytswap__svg" title={youtubeTab.audible === true ? 'Pause' : 'Play'} alt={youtubeTab.audible === true ? 'Pause' : 'Play'} onClick={(e) => {
+                    <img src={this.state.audible === true ? pauseButtonUrl : playButtonUrl} className="ytswap__svg" title={youtubeTab.audible === true ? 'Pause' : 'Play'} alt={youtubeTab.audible === true ? 'Pause' : 'Play'} onClick={(e) => {
                         this.play(e, youtubeTab.id)
                     }}/>
                     <img src={focusButtonUrl} className="ytswap__svg" title="Focus" alt="Focus" onClick={(e) => {
@@ -29,6 +29,10 @@ export class YoutubeTab extends Component {
             </div>
     }
 
+    componentWillMount() {
+        this.setState({audible: this.props.youtubeTab.audible});
+    }
+
     previous(e, youtubeTabId) {
         e.preventDefault();
 
@@ -37,6 +41,8 @@ export class YoutubeTab extends Component {
 
     play(e, youtubeTabId) {
         e.preventDefault();
+
+        this.state.audible = !this.state.audible;
 
         chrome.runtime.sendMessage({type: "play", tabId: youtubeTabId});
     }
