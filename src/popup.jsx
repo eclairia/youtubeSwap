@@ -40,18 +40,25 @@ export class Popup extends Component {
         });
     }
 
-    componentDidUpdate() {
-        if (this.getCookie('ytswap_popup_closed') === 'true') {
-            let ytswapRootElement =  document.querySelector('#ytswap__root');
-            let ytswapPopupOpenButton = document.querySelector('#ytswap__popup_open_button');
+    async componentDidUpdate() {
+        let ytswapRootElement =  document.querySelector('#ytswap__root');
+        let ytswapPopupOpenButton = document.querySelector('#ytswap__popup_open_button');
 
-
-            if (ytswapRootElement) {
+        if (await this.getCookie('ytswap_popup_closed') === 'true') {
+            if (ytswapRootElement && ytswapPopupOpenButton) {
+                ytswapRootElement.classList.remove('ytswap__root_open_animation');
+                ytswapRootElement.classList.remove('ytswap__root_open_cookie');
                 ytswapRootElement.classList.add('ytswap__root_close_cookie');
-            }
 
-            if (ytswapPopupOpenButton) {
                 ytswapPopupOpenButton.style.opacity = 1;
+            }
+        } else {
+            if (ytswapRootElement && ytswapPopupOpenButton) {
+                ytswapRootElement.classList.remove('ytswap__root_close_animation');
+                ytswapRootElement.classList.remove('ytswap__root_close_cookie');
+                ytswapRootElement.classList.add('ytswap__root_open_cookie');
+
+                ytswapPopupOpenButton.style.opacity = 0;
             }
         }
     }
@@ -59,17 +66,17 @@ export class Popup extends Component {
     openPopup() {
         let ytswapRootElement =  document.querySelector('#ytswap__root');
 
+        ytswapRootElement.classList.add('ytswap__root_open_animation');
+
         if (ytswapRootElement.classList.contains('ytswap__root_close_animation')) {
             ytswapRootElement.classList.remove('ytswap__root_close_animation');
         }
-
-        ytswapRootElement.classList.add('ytswap__root_open_animation');
 
         ytswapRootElement.removeEventListener("webkitAnimationEnd", this.closePopupEndListenner);
 
         ytswapRootElement.addEventListener("webkitAnimationEnd", this.openPopupEndListenner);
 
-        document.cookie = "ytswap_popup_closed=false"
+        this.setCookie('ytswap_popup_closed', 'false');
     }
 
     closePopup() {
@@ -84,7 +91,7 @@ export class Popup extends Component {
 
         ytswapRootElement.addEventListener("webkitAnimationEnd", this.closePopupEndListenner);
 
-        document.cookie = "ytswap_popup_closed=true";
+        this.setCookie('ytswap_popup_closed', 'true');
     }
 
     openPopupEndListenner() {
@@ -99,19 +106,15 @@ export class Popup extends Component {
         ytswapPopupOpenButton.style.opacity = 1;
     }
 
-    getCookie(cname) {
-        let name = cname + '=';
-        let decodedCookie = decodeURIComponent(document.cookie);
-        let ca = decodedCookie.split(';');
-        for(let i = 0; i <ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) === ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) === 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return '';
+    getCookie(name) {
+        return new Promise((resolve, reject) => {
+            chrome.runtime.sendMessage({type: "get_cookie", name: name}, (response) => {
+                resolve(response.value);
+            });
+        });
+    }
+
+    setCookie(name, value) {
+        chrome.runtime.sendMessage({type: "set_cookie", name: name, value: value});
     }
 }

@@ -6,7 +6,12 @@
   "permissions": [
     "<all_urls>",
     "tabs",
-    "tabCapture"
+    "tabCapture",
+    "storage",
+    "cookies",
+    "http://*/*",
+    "https://*/*"
+
   ],
   "content_scripts": [
     {

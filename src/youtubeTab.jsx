@@ -10,13 +10,19 @@ export class YoutubeTab extends Component {
 
         let youtubeTab = this.props.youtubeTab;
 
+        chrome.storage.sync.get(['audible' + youtubeTab.id], (result) => {
+            this.setState({['audible' + youtubeTab.id]: result['audible' + youtubeTab.id]})
+        });
+
+        let state = 'audible' + youtubeTab.id;
+
         return <div key={this.props.index} className="ytswap__tab">
                 <span className="ytswap__title">{youtubeTab.title}</span><br/>
                 <div className="ytswap__actions">
                     <img src={previousButtonUrl} className="ytswap__svg" title="Vidéo précédente" alt="Vidéo précédente" onClick={(e) => {
                         this.previous(e, youtubeTab.id)
                     }}/>
-                    <img src={this.state.audible === true ? pauseButtonUrl : playButtonUrl} className="ytswap__svg" title={youtubeTab.audible === true ? 'Pause' : 'Play'} alt={youtubeTab.audible === true ? 'Pause' : 'Play'} onClick={(e) => {
+                    <img src={this.state[state] === true ? pauseButtonUrl : playButtonUrl} className="ytswap__svg" title={this.state[state] === true ? 'Pause' : 'Play'} alt={this.state[state] === true ? 'Pause' : 'Play'} onClick={(e) => {
                         this.play(e, youtubeTab.id)
                     }}/>
                     <img src={focusButtonUrl} className="ytswap__svg" title="Focus" alt="Focus" onClick={(e) => {
@@ -29,8 +35,10 @@ export class YoutubeTab extends Component {
             </div>
     }
 
-    componentWillMount() {
-        this.setState({audible: this.props.youtubeTab.audible});
+    componentDidMount() {
+        let youtubeTab = this.props.youtubeTab;
+
+        chrome.storage.sync.set({['audible' + youtubeTab.id]: youtubeTab.audible});
     }
 
     previous(e, youtubeTabId) {
@@ -39,10 +47,18 @@ export class YoutubeTab extends Component {
         chrome.runtime.sendMessage({type: "previous", tabId: youtubeTabId});
     }
 
-    play(e, youtubeTabId) {
+    async play(e, youtubeTabId) {
         e.preventDefault();
 
-        this.state.audible = !this.state.audible;
+        let audible = await new Promise((resolve, reject) => {
+            chrome.storage.sync.get(['audible' + youtubeTabId], (result) => {
+               resolve(result['audible' + youtubeTabId]);
+            });
+        });
+
+        chrome.storage.sync.set({['audible' + youtubeTabId]: !audible});
+
+        this.setState({['audible' + youtubeTabId]: !audible});
 
         chrome.runtime.sendMessage({type: "play", tabId: youtubeTabId});
     }

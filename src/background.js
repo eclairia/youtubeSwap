@@ -1,7 +1,7 @@
 setInterval(() => {
     chrome.tabs.query({}, async function(tabs){
         let youtubeTabs = tabs.map((tab) => {
-            if (tab.url.match('^(http|https):\\/\\/www.youtube.com\\/watch\\?v\\=.*$')) {
+            if (tab.url.match('^(http|https):\\/\\/www.youtube.com\\/watch\\?v\\=.*$') && tab.status === 'complete') {
                 return tab;
             }
         }).filter((tab) => {
@@ -18,6 +18,24 @@ setInterval(() => {
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     let tabId = request.tabId;
+
+    if (request.type === 'get_cookie') {
+        chrome.cookies.get({
+            name: request.name,
+            url: "https://*/*",
+        }, (cookie) => {
+            sendResponse({value: cookie.value});
+        });
+    }
+
+    if (request.type === 'set_cookie') {
+        chrome.cookies.set({
+            name: request.name,
+            url: "https://*/*",
+            value: request.value
+        }, () => {
+        });
+    }
 
     if (request.type === 'previous') {
         chrome.tabs.goBack(tabId);

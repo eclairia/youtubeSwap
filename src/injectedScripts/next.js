@@ -26,25 +26,5 @@ function simulateClick(element) {
         'cancelable': true
     });
 
-    let canceled = !element.dispatchEvent(event);
-
-    if (canceled) {
-        //Un gestionnaire appelé preventDefault.
-        console.log("canceled");
-    } else {
-        //Aucun gestionnaires appelé preventDefault.
-        console.log("not canceled");
-    }
+    !element.dispatchEvent(event);
 }
-
-// chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-//     if (msg.text === 'report_back') {
-//         console.log(msg.doms);
-//     }
-// });
-
-// (function () {
-//     chrome.tabs.goBack(tabs[8]['id'], () => {
-//         console.log('Je teste');
-//     });
-// })();

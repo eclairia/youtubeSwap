@@ -102,6 +102,10 @@
     opacity: 0;
 }
 
+.ytswap__root_open_cookie {
+    transform: translate(0%);
+}
+
 .ytswap__root_close_cookie {
     transform: translate(98%);
 }
