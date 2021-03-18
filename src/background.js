@@ -1,7 +1,7 @@
 setInterval(() => {
     chrome.tabs.query({}, async function(tabs){
         let youtubeTabs = tabs.map((tab) => {
-            if (tab.url.match('^(http|https):\\/\\/www.youtube.com\\/watch\\?v\\=.*$') && tab.status === 'complete') {
+            if (tab.url.match('^(http|https):\\/\\/www.youtube.com\\/watch\\?v\\=.*$')) {
                 return tab;
             }
         }).filter((tab) => {
