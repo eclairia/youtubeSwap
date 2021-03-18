@@ -41,16 +41,18 @@ export class Popup extends Component {
     }
 
     componentDidUpdate() {
-        console.log(this.getCookie('ytswap_popup_closed'));
-
         if (this.getCookie('ytswap_popup_closed') === 'true') {
             let ytswapRootElement =  document.querySelector('#ytswap__root');
             let ytswapPopupOpenButton = document.querySelector('#ytswap__popup_open_button');
 
-            ytswapPopupOpenButton.style.opacity = 1;
 
+            if (ytswapRootElement) {
+                ytswapRootElement.classList.add('ytswap__root_close_cookie');
+            }
 
-            ytswapRootElement.classList.add('ytswap__root_close_cookie');
+            if (ytswapPopupOpenButton) {
+                ytswapPopupOpenButton.style.opacity = 1;
+            }
         }
     }
 
