@@ -13,6 +13,7 @@
 #ytswap__root_main {
     position: relative !important;
 
+    width: 100%;
     max-height: 250px;
 
     overflow-y: scroll !important;
@@ -125,7 +126,7 @@
 
 @keyframes closePopup {
     0% {
-        transform: translate(0);
+        transform: translate(0%);
     }
 
     100% {
