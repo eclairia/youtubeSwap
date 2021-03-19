@@ -44,21 +44,24 @@ export class Popup extends Component {
         let ytswapRootElement =  document.querySelector('#ytswap__root');
         let ytswapPopupOpenButton = document.querySelector('#ytswap__popup_open_button');
 
-        if (await this.getCookie('ytswap_popup_closed') === 'true') {
-            if (ytswapRootElement && ytswapPopupOpenButton) {
-                ytswapRootElement.classList.remove('ytswap__root_open_animation');
-                ytswapRootElement.classList.remove('ytswap__root_open_cookie');
-                ytswapRootElement.classList.add('ytswap__root_close_cookie');
+        if (ytswapRootElement && ytswapPopupOpenButton) {
+            if (await this.getCookie('ytswap_popup_closed') === 'true') {
 
-                ytswapPopupOpenButton.style.opacity = 1;
-            }
-        } else {
-            if (ytswapRootElement && ytswapPopupOpenButton) {
-                ytswapRootElement.classList.remove('ytswap__root_close_animation');
-                ytswapRootElement.classList.remove('ytswap__root_close_cookie');
-                ytswapRootElement.classList.add('ytswap__root_open_cookie');
+                if (!ytswapRootElement.classList.contains('ytswap__root_close_cookie')) {
+                    ytswapRootElement.classList.remove('ytswap__root_open_animation');
+                    ytswapRootElement.classList.remove('ytswap__root_open_cookie');
+                    ytswapRootElement.classList.add('ytswap__root_close_cookie');
 
-                ytswapPopupOpenButton.style.opacity = 0;
+                    ytswapPopupOpenButton.style.opacity = 1;
+                } else {
+                    if (!ytswapRootElement.classList.contains('ytswap__root_open_cookie')) {
+                        ytswapRootElement.classList.remove('ytswap__root_close_animation');
+                        ytswapRootElement.classList.remove('ytswap__root_close_cookie');
+                        ytswapRootElement.classList.add('ytswap__root_open_cookie');
+
+                        ytswapPopupOpenButton.style.opacity = 0;
+                    }
+                }
             }
         }
     }
