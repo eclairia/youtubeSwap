@@ -46,21 +46,20 @@ export class Popup extends Component {
 
         if (ytswapRootElement && ytswapPopupOpenButton) {
             if (await this.getCookie('ytswap_popup_closed') === 'true') {
-
                 if (!ytswapRootElement.classList.contains('ytswap__root_close_cookie')) {
                     ytswapRootElement.classList.remove('ytswap__root_open_animation');
                     ytswapRootElement.classList.remove('ytswap__root_open_cookie');
                     ytswapRootElement.classList.add('ytswap__root_close_cookie');
 
                     ytswapPopupOpenButton.style.opacity = 1;
-                } else {
-                    if (!ytswapRootElement.classList.contains('ytswap__root_open_cookie')) {
-                        ytswapRootElement.classList.remove('ytswap__root_close_animation');
-                        ytswapRootElement.classList.remove('ytswap__root_close_cookie');
-                        ytswapRootElement.classList.add('ytswap__root_open_cookie');
+                }
+            } else {
+                if (!ytswapRootElement.classList.contains('ytswap__root_open_cookie')) {
+                    ytswapRootElement.classList.remove('ytswap__root_close_animation');
+                    ytswapRootElement.classList.remove('ytswap__root_close_cookie');
+                    ytswapRootElement.classList.add('ytswap__root_open_cookie');
 
-                        ytswapPopupOpenButton.style.opacity = 0;
-                    }
+                    ytswapPopupOpenButton.style.opacity = 0;
                 }
             }
         }
