@@ -10,11 +10,11 @@ export class YoutubeTab extends Component {
 
         let youtubeTab = this.props.youtubeTab;
 
-        chrome.storage.sync.get(['audible' + youtubeTab.id], (result) => {
-            this.setState({['audible' + youtubeTab.id]: result['audible' + youtubeTab.id]})
-        });
-
-        let state = 'audible' + youtubeTab.id;
+        // chrome.storage.sync.get(['audible' + youtubeTab.id], (result) => {
+        //     this.setState({['audible' + youtubeTab.id]: result['audible' + youtubeTab.id]})
+        // });
+        //
+        // let state = 'audible' + youtubeTab.id;
 
         return <div key={this.props.index} className="ytswap__tab">
                 <span className="ytswap__title">{youtubeTab.title}</span><br/>
@@ -22,7 +22,7 @@ export class YoutubeTab extends Component {
                     <img src={previousButtonUrl} className="ytswap__svg" title="Vidéo précédente" alt="Vidéo précédente" onClick={(e) => {
                         this.previous(e, youtubeTab.id)
                     }}/>
-                    <img src={this.state[state] === true ? pauseButtonUrl : playButtonUrl} className="ytswap__svg" title={this.state[state] === true ? 'Pause' : 'Play'} alt={this.state[state] === true ? 'Pause' : 'Play'} onClick={(e) => {
+                    <img src={this.props.youtubeTab.audible === true ? pauseButtonUrl : playButtonUrl} className="ytswap__svg" title={this.props.youtubeTab.audible === true ? 'Pause' : 'Play'} alt={this.props.youtubeTab.audible === true ? 'Pause' : 'Play'} onClick={(e) => {
                         this.play(e, youtubeTab.id)
                     }}/>
                     <img src={focusButtonUrl} className="ytswap__svg" title="Focus" alt="Focus" onClick={(e) => {
@@ -35,11 +35,11 @@ export class YoutubeTab extends Component {
             </div>
     }
 
-    componentDidMount() {
-        let youtubeTab = this.props.youtubeTab;
-
-        chrome.storage.sync.set({['audible' + youtubeTab.id]: youtubeTab.audible});
-    }
+    // componentDidMount() {
+    //     let youtubeTab = this.props.youtubeTab;
+    //
+    //     chrome.storage.sync.set({['audible' + youtubeTab.id]: youtubeTab.audible});
+    // }
 
     previous(e, youtubeTabId) {
         e.preventDefault();

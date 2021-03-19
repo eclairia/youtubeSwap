@@ -4,8 +4,6 @@ import { YoutubeTab } from './youtubeTab.jsx';
 
 export class Popup extends Component {
     render () {
-        let closeButtonUrl = chrome.runtime.getURL('src/img/cancel.svg');
-
         return this.state.youtubeTabs.length >= 1 && <div id="ytswap__root">
              <span id="ytswap__popup_open_button" className="ytswap__popup_open_button" onClick={(e) => {
                  e.preventDefault();
@@ -16,7 +14,7 @@ export class Popup extends Component {
             <div id="ytswap__root_main">
                 <h1>Youtube Swap</h1>
 
-                <img src={closeButtonUrl} className="ytswap__svg_close_cross" title="Fermer" alt="Fermer" onClick={(e) => {
+                <img src={this.props.closeButtonUrl} className="ytswap__svg_close_cross" title="Fermer" alt="Fermer" onClick={(e) => {
                     e.preventDefault();
 
                     this.closePopup();
