@@ -47,7 +47,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     if (request.type === 'focus') {
         chrome.tabs.get(tabId, function(tab) {
-            chrome.tabs.highlight({'tabs': tab.index});
+            chrome.tabs.highlight({windowId: tab.windowId, tabs: tab.index}, () => {
+                chrome.windows.update(tab.windowId, {focused: true});
+            });
         });
     }
 
