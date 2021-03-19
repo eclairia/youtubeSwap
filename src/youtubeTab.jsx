@@ -10,12 +10,6 @@ export class YoutubeTab extends Component {
 
         let youtubeTab = this.props.youtubeTab;
 
-        // chrome.storage.sync.get(['audible' + youtubeTab.id], (result) => {
-        //     this.setState({['audible' + youtubeTab.id]: result['audible' + youtubeTab.id]})
-        // });
-        //
-        // let state = 'audible' + youtubeTab.id;
-
         return <div key={this.props.index} className="ytswap__tab">
                 <span className="ytswap__title">{youtubeTab.title}</span><br/>
                 <div className="ytswap__actions">
@@ -34,12 +28,6 @@ export class YoutubeTab extends Component {
                 </div>
             </div>
     }
-
-    // componentDidMount() {
-    //     let youtubeTab = this.props.youtubeTab;
-    //
-    //     chrome.storage.sync.set({['audible' + youtubeTab.id]: youtubeTab.audible});
-    // }
 
     previous(e, youtubeTabId) {
         e.preventDefault();
