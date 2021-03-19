@@ -1,12 +1,14 @@
 {
   "name": "Extension YouTube",
   "description": "Extension YouTube",
+  "icons": {
+    "128": "128.png"
+  },
   "manifest_version": 2,
-  "version": "0.1",
+  "version": "0.0.0.1",
   "permissions": [
     "<all_urls>",
     "tabs",
-    "tabCapture",
     "storage",
     "cookies",
     "http://*/*",
