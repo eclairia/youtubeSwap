@@ -7,6 +7,11 @@ esbuild@^0.9.1:
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.9.1.tgz#539b4741d5da95e4dd9d27cd5b290104d7d62f9b"
   integrity sha512-2A0lJxpkV9tvwz+tCD6Ww1bvbZKvH4zBz8G8Dx/MhLwmJ23p8XRIz44ObWt8dpDpZARzhiahacQ+b/V1GJbx0A==
 
+lodash@^4.17.21:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
+
 preact@^10.5.12:
   version "10.5.12"
   resolved "https://registry.yarnpkg.com/preact/-/preact-10.5.12.tgz#6a8ee8bf40a695c505df9abebacd924e4dd37704"

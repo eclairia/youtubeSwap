@@ -10,7 +10,5 @@ import './css/main.css';
 
     let closeButtonUrl = chrome.runtime.getURL('src/img/cancel.svg');
 
-    setInterval(() => {
-        render(<Popup closeButtonUrl={closeButtonUrl} />, document.body, placeholder);
-    }, 5000);
+    render(<Popup closeButtonUrl={closeButtonUrl} />, document.body, placeholder);
 })();

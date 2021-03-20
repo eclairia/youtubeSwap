@@ -1,4 +1,5 @@
 import { h, Component, render } from 'preact';
+import _ from 'lodash';
 
 export class YoutubeTab extends Component {
     render() {
@@ -27,6 +28,10 @@ export class YoutubeTab extends Component {
                     }}/>
                 </div>
             </div>
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return !_.isEqual(this.props, nextProps) || !_.isEqual(this.state, nextState);
     }
 
     previous(e, youtubeTabId, youtubeTabUrl) {
