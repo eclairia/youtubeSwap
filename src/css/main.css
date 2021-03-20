@@ -111,11 +111,11 @@
 }
 
 .ytswap__root_open_animation {
-    animation: openPopup 2s forwards !important;
+    animation: openPopup 1s forwards !important;
 }
 
 .ytswap__root_close_animation {
-    animation: closePopup 2s forwards !important;
+    animation: closePopup 1s forwards !important;
 }
 
 @keyframes openPopup {
