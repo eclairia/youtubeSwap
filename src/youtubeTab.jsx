@@ -14,28 +14,28 @@ export class YoutubeTab extends Component {
                 <span className="ytswap__title">{youtubeTab.title}</span><br/>
                 <div className="ytswap__actions">
                     <img src={previousButtonUrl} className="ytswap__svg" title="Vidéo précédente" alt="Vidéo précédente" onClick={(e) => {
-                        this.previous(e, youtubeTab.id)
+                        this.previous(e, youtubeTab.id, youtubeTab.url)
                     }}/>
                     <img src={this.props.youtubeTab.audible === true ? pauseButtonUrl : playButtonUrl} className="ytswap__svg" title={this.props.youtubeTab.audible === true ? 'Pause' : 'Play'} alt={this.props.youtubeTab.audible === true ? 'Pause' : 'Play'} onClick={(e) => {
-                        this.play(e, youtubeTab.id)
+                        this.play(e, youtubeTab.id, youtubeTab.url)
                     }}/>
                     <img src={focusButtonUrl} className="ytswap__svg" title="Focus" alt="Focus" onClick={(e) => {
                         this.focus(e, youtubeTab.id)
                     }}/>
                     <img src={nextButtonUrl} className="ytswap__svg" title="Vidéo suivante" alt="Vidéo suivante" onClick={(e) => {
-                        this.next(e, youtubeTab.id)
+                        this.next(e, youtubeTab.id, youtubeTab.url)
                     }}/>
                 </div>
             </div>
     }
 
-    previous(e, youtubeTabId) {
+    previous(e, youtubeTabId, youtubeTabUrl) {
         e.preventDefault();
 
-        chrome.runtime.sendMessage({type: "previous", tabId: youtubeTabId});
+        chrome.runtime.sendMessage({type: "previous", tabId: youtubeTabId, tabUrl: youtubeTabUrl});
     }
 
-    async play(e, youtubeTabId) {
+    async play(e, youtubeTabId, youtubeTabUrl) {
         e.preventDefault();
 
         let audible = await new Promise((resolve, reject) => {
@@ -48,7 +48,7 @@ export class YoutubeTab extends Component {
 
         this.setState({['audible' + youtubeTabId]: !audible});
 
-        chrome.runtime.sendMessage({type: "play", tabId: youtubeTabId});
+        chrome.runtime.sendMessage({type: "play", tabId: youtubeTabId, tabUrl: youtubeTabUrl});
     }
 
     focus(e, youtubeTabId) {
@@ -57,9 +57,9 @@ export class YoutubeTab extends Component {
         chrome.runtime.sendMessage({type: "focus", tabId: youtubeTabId});
     }
 
-    next(e, youtubeTabId) {
+    next(e, youtubeTabId, youtubeTabUrl) {
         e.preventDefault();
 
-        chrome.runtime.sendMessage({type: "next", tabId: youtubeTabId});
+        chrome.runtime.sendMessage({type: "next", tabId: youtubeTabId, tabUrl: youtubeTabUrl});
     }
 }

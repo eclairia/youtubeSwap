@@ -1,7 +1,7 @@
 setInterval(() => {
     chrome.tabs.query({}, async function(tabs){
         let youtubeTabs = tabs.map((tab) => {
-            if (tab.url.match('^(http|https):\\/\\/www.youtube.com\\/watch\\?v\\=.*$')) {
+            if (tab.url.match('^(http|https):\\/\\/(?:www.)?(music\\.youtube|youtube)\\.com\\/watch\\?v\\=.*$')) {
                 return tab;
             }
         }).filter((tab) => {
@@ -18,6 +18,7 @@ setInterval(() => {
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     let tabId = request.tabId;
+    let tabUrl = request.tabUrl;
 
     if (request.type === 'get_cookie') {
         chrome.cookies.get({
@@ -38,11 +39,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 
     if (request.type === 'previous') {
-        chrome.tabs.goBack(tabId);
+        if (tabUrl.match('^(http|https):\\/\\/(?:www.)?music\\.youtube')) {
+            chrome.tabs.executeScript(tabId, {file: 'src/injectedScripts/youtubeMusic/previous.js', runAt: 'document_end'});
+        } else {
+            chrome.tabs.goBack(tabId);
+        }
     }
 
     if (request.type === 'play') {
-        chrome.tabs.executeScript(tabId, {file: 'src/injectedScripts/play.js', runAt: 'document_end'});
+        if (tabUrl.match('^(http|https):\\/\\/(?:www.)?music\\.youtube')) {
+            chrome.tabs.executeScript(tabId, {file: 'src/injectedScripts/youtubeMusic/play.js', runAt: 'document_end'});
+        } else {
+            chrome.tabs.executeScript(tabId, {file: 'src/injectedScripts/youtube/play.js', runAt: 'document_end'});
+        }
     }
 
     if (request.type === 'focus') {
@@ -54,7 +63,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 
     if (request.type === 'next') {
-        chrome.tabs.executeScript(tabId, {file: 'src/injectedScripts/next.js', runAt: 'document_end'});
+        if (tabUrl.match('^(http|https):\\/\\/(?:www.)?music\\.youtube')) {
+            chrome.tabs.executeScript(tabId, {file: 'src/injectedScripts/youtubeMusic/next.js', runAt: 'document_end'});
+        } else {
+            chrome.tabs.executeScript(tabId, {file: 'src/injectedScripts/youtube/next.js', runAt: 'document_end'});
+        }
     }
 
     return true;
