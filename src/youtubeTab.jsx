@@ -17,7 +17,7 @@ export class YoutubeTab extends Component {
                     <img src={previousButtonUrl} className="ytswap__svg" title="Vidéo précédente" alt="Vidéo précédente" onClick={(e) => {
                         this.previous(e, youtubeTab.id, youtubeTab.url)
                     }}/>
-                    <img src={this.props.youtubeTab.audible === true ? pauseButtonUrl : playButtonUrl} className="ytswap__svg" title={this.props.youtubeTab.audible === true ? 'Pause' : 'Play'} alt={this.props.youtubeTab.audible === true ? 'Pause' : 'Play'} onClick={(e) => {
+                    <img src={youtubeTab.audible === true ? pauseButtonUrl : playButtonUrl} className="ytswap__svg" title={youtubeTab.audible === true ? 'Pause' : 'Play'} alt={youtubeTab.audible === true ? 'Pause' : 'Play'} onClick={(e) => {
                         this.play(e, youtubeTab.id, youtubeTab.url)
                     }}/>
                     <img src={focusButtonUrl} className="ytswap__svg" title="Focus" alt="Focus" onClick={(e) => {

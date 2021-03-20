@@ -8,7 +8,5 @@ import './css/main.css';
     const placeholder = document.createElement("div");
     document.body.appendChild(placeholder);
 
-    let closeButtonUrl = chrome.runtime.getURL('src/img/cancel.svg');
-
-    render(<Popup closeButtonUrl={closeButtonUrl} />, document.body, placeholder);
+    render(<Popup />, document.body, placeholder);
 })();
